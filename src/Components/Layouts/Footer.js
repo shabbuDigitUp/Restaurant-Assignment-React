@@ -1,0 +1,12 @@
+import React from "react";
+
+const Footer = () => {
+  
+    return (
+      <footer className="footer theme-color text_center">
+        Copyright @2023
+      </footer>
+    );
+  }
+
+export default Footer;
