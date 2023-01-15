@@ -1,4 +1,3 @@
-
 form{
     max-width: 60%;
     margin: 2rem auto 0;
@@ -11,4 +10,10 @@ form input{
     font-size: 1.2rem;
     opacity: .5;
     background: #c1cf7f;
+}
+
+@media screen and (max-width: 768px) {
+    form {
+        max-width: 80%;
+    }
 }
