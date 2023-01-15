@@ -1,6 +1,6 @@
 import Header from "./Components/Layouts/Header";
 import Footer from "./Components/Layouts/Footer";
-import Main from "./Components/Layouts/main";
+import Main from "./Components/Layouts/Main";
 import "./styles/app.css"
 
 const App = () => {

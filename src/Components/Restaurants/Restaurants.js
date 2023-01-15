@@ -17,6 +17,8 @@ const Restaurant = () => {
     return CURRENTTIME += tm
     })
 
+    console.log('CURRENTTIME', CURRENTTIME);
+
   const [searchInput, setSearchInput] = useState("");
 
   const handleChange = (e) => {
@@ -29,7 +31,7 @@ const Restaurant = () => {
       <Search handleChange={handleChange} searchInput={searchInput} />
       {keys.map((key, idx) => {
         return (
-          <section key={idx}>
+          <section key={idx} id={key.toLowerCase().split(" ").join("")}>
             <h2>{key}</h2>
             <ul className="foodItems">
               {searchInput.length === 0
@@ -63,7 +65,8 @@ const Restaurant = () => {
                     }
                   )
                 : availableRestra[key].map(({ foodname }, idx) => {
-                    if (foodname.toLowerCase().includes(searchInput)) {
+                  const regex = /[A-Z]/g;
+                    if (foodname.match(regex)(searchInput)) {
                       return <li key={idx}>{`${foodname}`}</li>;
                     } else {
                       return null}
