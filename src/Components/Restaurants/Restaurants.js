@@ -65,8 +65,7 @@ const Restaurant = () => {
                     }
                   )
                 : availableRestra[key].map(({ foodname }, idx) => {
-                  const regex = /[A-Z]/g;
-                    if (foodname.match(regex)(searchInput)) {
+                    if (foodname.toLowerCase().includes(searchInput)) {
                       return <li key={idx}>{`${foodname}`}</li>;
                     } else {
                       return null}
