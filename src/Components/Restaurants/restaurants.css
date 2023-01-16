@@ -18,7 +18,7 @@ h2 {
 
 .foodItems li {
   padding: 2rem;
-  border: 1px solid;
+  border-radius: 4px;
   background: #ebebec;
 }
 

@@ -3,13 +3,14 @@ form{
     margin: 2rem auto 0;
 }
 form input{
-    border-bottom: 1px solid #609a1d;
+    border-bottom: 2px solid #609a1d;
+    border-radius: 4px;
     width: 100%;
     min-height: 50px;
     padding-inline: 1rem;
     font-size: 1.2rem;
     opacity: .5;
-    background: #c1cf7f;
+    background: #ebebec;
 }
 
 @media screen and (max-width: 768px) {

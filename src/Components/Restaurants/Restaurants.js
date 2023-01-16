@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import restaurantMenu from "../../Json/restaurant";
-import Search from "../Form/Search"
+import Search from "../Form/Search";
 import "./restaurants.css";
 
 const Restaurant = () => {
@@ -10,14 +10,12 @@ const Restaurant = () => {
   let CURRENTTIME = 0;
 
   const date = new Date();
-  const showTime =  date.getHours() + ":" + date.getMinutes();
+  const showTime = date.getHours() + ":" + date.getMinutes();
 
-  showTime.split(":").map((t, idx) =>{
-    let tm = idx === 0 ? parseInt(t * 60) : parseInt(t)
-    return CURRENTTIME += tm
-    })
-
-    console.log('CURRENTTIME', CURRENTTIME);
+  showTime.split(":").map((t, idx) => {
+    let tm = idx === 0 ? parseInt(t * 60) : parseInt(t);
+    return (CURRENTTIME += tm);
+  });
 
   const [searchInput, setSearchInput] = useState("");
 
@@ -29,47 +27,46 @@ const Restaurant = () => {
   return (
     <>
       <Search handleChange={handleChange} searchInput={searchInput} />
+
       {keys.map((key, idx) => {
         return (
           <section key={idx} id={key.toLowerCase().split(" ").join("")}>
             <h2>{key}</h2>
             <ul className="foodItems">
-              {searchInput.length === 0
-                ? availableRestra[key].map(
-                    ({ foodname, servingtime, outofstock }, idx) => {
+              {availableRestra[key].filter(({foodname}) => {
 
-                      let STARTTIME = 0;
-                      let ENDTIME = 0;  
+                  if (!searchInput) return true;
+                  if (foodname.toLowerCase().includes(searchInput)) {
+                    return true;
+                  }            
+                  })
+                .map(({ foodname, servingtime, outofstock }, idx) => {
 
-                      servingtime.split("-")[0].split(":").map((t, i) =>{
-                        let tm = i === 0 ? parseInt(t * 60) : parseInt(t)
-                        return STARTTIME += tm
-                       })
-                      
-                      servingtime.split("-")[1].split(":").map((t, i) =>{
-                        let tm = i === 0 ? parseInt(t * 60) : parseInt(t)
-                        return ENDTIME += tm
-                       })
+                  let STARTTIME = 0;
+                  let ENDTIME = 0;
 
-                      if (STARTTIME < CURRENTTIME && ENDTIME > CURRENTTIME) {
-                        return outofstock ? (
-                          <li key={idx} readOnly className="disabled">
-                            {foodname}
-                          </li>
-                        ) : (
-                          <li key={idx}>{`${foodname}`}</li>
-                        );
-                      } else {
-                        return null;
-                      }
-                    }
-                  )
-                : availableRestra[key].map(({ foodname }, idx) => {
-                    if (foodname.toLowerCase().includes(searchInput)) {
-                      return <li key={idx}>{`${foodname}`}</li>;
-                    } else {
-                      return null}
-                  })}
+                  servingtime.split("-")[0].split(":").map((t, i) => {
+                      let tm = i === 0 ? parseInt(t * 60) : parseInt(t);
+                      return (STARTTIME += tm);
+                    });
+
+                    servingtime.split("-")[1].split(":").map((t, i) => {
+                      let tm = i === 0 ? parseInt(t * 60) : parseInt(t);
+                      return (ENDTIME += tm);
+                    });
+
+                  if (STARTTIME <= CURRENTTIME && ENDTIME >= CURRENTTIME) {
+                    return outofstock ? (
+                      <li key={idx} readOnly className="disabled">
+                        {foodname}
+                      </li>
+                    ) : (
+                      <li key={idx}>{`${foodname}`}</li>
+                    );
+                  } else {
+                    return null;
+                  }
+                })}
             </ul>
           </section>
         );

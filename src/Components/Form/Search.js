@@ -6,7 +6,7 @@ const Search = (props) => {
     <form>
       <input
         type="text"
-        placeholder="Search dishes here"
+        placeholder="Search dishes here..."
         onChange={props.handleChange}
         value={props.searchInput}
       />
