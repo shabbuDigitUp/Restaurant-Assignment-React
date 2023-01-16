@@ -36,7 +36,7 @@ const Restaurant = () => {
               {availableRestra[key].filter(({foodname}) => {
 
                   if (!searchInput) return true;
-                  if (foodname.toLowerCase().includes(searchInput)) {
+                  if (foodname.toLowerCase().includes(searchInput.toLowerCase())) {
                     return true;
                   }            
                   })
@@ -56,13 +56,8 @@ const Restaurant = () => {
                     });
 
                   if (STARTTIME <= CURRENTTIME && ENDTIME >= CURRENTTIME) {
-                    return outofstock ? (
-                      <li key={idx} readOnly className="disabled">
-                        {foodname}
-                      </li>
-                    ) : (
-                      <li key={idx}>{`${foodname}`}</li>
-                    );
+                    return <li key={idx} className={`${outofstock === true ? 'disabled' : null}`}>{`${foodname}`}</li>
+                    
                   } else {
                     return null;
                   }
